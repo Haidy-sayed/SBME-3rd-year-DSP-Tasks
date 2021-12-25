@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mainWindow</class>
+ <widget class="QMainWindow" name="mainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>847</width>
+    <height>674</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>BioMedical Signal Viewer</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="graphCh1" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>491</width>
+      <height>151</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="graphCh2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>320</y>
+      <width>491</width>
+      <height>161</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="spectrogram" native="true">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>40</y>
+      <width>211</width>
+      <height>371</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="playPauseButtonCh1">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Play/Pause</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zoomInButtonCh1">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>220</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zoom in</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zoomOutButtonCh1">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>220</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zoom out</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stopButtonCh1">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>220</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="playPauseButtonCh2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>520</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Play/Pause</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zoomInButtonCh2">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>520</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zoom in</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zoomOutButtonCh2">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>520</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Zoom out</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="stopButtonCh2">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>520</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="spectroRun">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>450</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Spectro 1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>5</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>CHANNEL 1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>275</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>CHANNEL 2</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>590</x>
+      <y>20</y>
+      <width>161</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>SPECTROGRAM</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>520</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Spectro 2</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>847</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <widget class="QMenu" name="menuOpen">
+     <property name="title">
+      <string>Open</string>
+     </property>
+     <addaction name="menuOpen_Ch1"/>
+     <addaction name="menuOpen_Ch2"/>
+     <addaction name="actionSpectro_Ch_1"/>
+     <addaction name="actionSpectro_Ch2"/>
+    </widget>
+    <widget class="QMenu" name="menuSave_as">
+     <property name="title">
+      <string>Save as</string>
+     </property>
+     <addaction name="actionPDF"/>
+    </widget>
+    <addaction name="menuOpen"/>
+    <addaction name="menuSave_as"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuActions">
+    <property name="title">
+     <string>Actions</string>
+    </property>
+    <widget class="QMenu" name="menuChannel_1">
+     <property name="title">
+      <string>Channel 1</string>
+     </property>
+     <addaction name="actionShow_Hide"/>
+     <addaction name="actionChange_Color"/>
+     <addaction name="actionSpeed_Options_2"/>
+     <addaction name="actionAdd_Title"/>
+    </widget>
+    <widget class="QMenu" name="menuChannel_2">
+     <property name="title">
+      <string>Channel 2</string>
+     </property>
+     <addaction name="actionShow_Hide_2"/>
+     <addaction name="actionChange_Color_2"/>
+     <addaction name="actionSpeed_Options"/>
+     <addaction name="actionAdd_Title_2"/>
+    </widget>
+    <addaction name="menuChannel_1"/>
+    <addaction name="menuChannel_2"/>
+   </widget>
+   <widget class="QMenu" name="menuAbout">
+    <property name="title">
+     <string>About</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuSpectrogram_Actions">
+    <property name="title">
+     <string>Spectrogram Actions</string>
+    </property>
+    <widget class="QMenu" name="menuColor_Palettes">
+     <property name="title">
+      <string>Color Palettes</string>
+     </property>
+     <addaction name="actionPalette_1"/>
+     <addaction name="actionPalette_2"/>
+     <addaction name="actionPalette_3"/>
+     <addaction name="actionPalette_4"/>
+     <addaction name="actionPalette_5"/>
+    </widget>
+    <addaction name="menuColor_Palettes"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuActions"/>
+   <addaction name="menuSpectrogram_Actions"/>
+   <addaction name="menuAbout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="menuOpen_Ch1">
+   <property name="text">
+    <string>Channel 1</string>
+   </property>
+  </action>
+  <action name="menuOpen_Ch2">
+   <property name="text">
+    <string>Channel 2</string>
+   </property>
+  </action>
+  <action name="actionSpectro_Ch_1">
+   <property name="text">
+    <string>Spectro-Ch 1</string>
+   </property>
+  </action>
+  <action name="actionSpectro_Ch2">
+   <property name="text">
+    <string>Spectro-Ch2</string>
+   </property>
+  </action>
+  <action name="menuSave_asImg">
+   <property name="text">
+    <string>Img</string>
+   </property>
+  </action>
+  <action name="menuSave_asMp4">
+   <property name="text">
+    <string>mp4</string>
+   </property>
+  </action>
+  <action name="actionPlay_Pause">
+   <property name="text">
+    <string>Play/Pause</string>
+   </property>
+  </action>
+  <action name="actionZoom_in">
+   <property name="text">
+    <string>Zoom in</string>
+   </property>
+  </action>
+  <action name="actionZoom_out">
+   <property name="text">
+    <string>Zoom out</string>
+   </property>
+  </action>
+  <action name="actionPlay_Pause_2">
+   <property name="text">
+    <string>Play/Pause</string>
+   </property>
+  </action>
+  <action name="actionZoom_in_2">
+   <property name="text">
+    <string>Zoom in</string>
+   </property>
+  </action>
+  <action name="actionZoom_out_2">
+   <property name="text">
+    <string>Zoom out</string>
+   </property>
+  </action>
+  <action name="actionStop">
+   <property name="text">
+    <string>Stop</string>
+   </property>
+  </action>
+  <action name="actionSpectro">
+   <property name="text">
+    <string>Spectro</string>
+   </property>
+  </action>
+  <action name="actionPlay_Pause_3">
+   <property name="text">
+    <string>Play/Pause</string>
+   </property>
+  </action>
+  <action name="actionZoom_in_3">
+   <property name="text">
+    <string>Zoom in</string>
+   </property>
+  </action>
+  <action name="actionZoom_out_3">
+   <property name="text">
+    <string>Zoom out</string>
+   </property>
+  </action>
+  <action name="actionStop_2">
+   <property name="text">
+    <string>Stop</string>
+   </property>
+  </action>
+  <action name="actionSpectro_2">
+   <property name="text">
+    <string>Spectro</string>
+   </property>
+  </action>
+  <action name="actionExit_App">
+   <property name="text">
+    <string>Exit App</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionShow_Hide">
+   <property name="text">
+    <string>Show/Hide</string>
+   </property>
+  </action>
+  <action name="actionChange_Color">
+   <property name="text">
+    <string>Change Color</string>
+   </property>
+  </action>
+  <action name="actionShow_Hide_2">
+   <property name="text">
+    <string>Show/Hide</string>
+   </property>
+  </action>
+  <action name="actionChange_Color_2">
+   <property name="text">
+    <string>Change Color</string>
+   </property>
+  </action>
+  <action name="actionSpeed_Options">
+   <property name="text">
+    <string>Speed Options</string>
+   </property>
+  </action>
+  <action name="actionFull_Window">
+   <property name="text">
+    <string>Full Window</string>
+   </property>
+  </action>
+  <action name="actionPalette_1">
+   <property name="text">
+    <string>Palette 1</string>
+   </property>
+  </action>
+  <action name="actionPalette_2">
+   <property name="text">
+    <string>Palette 2</string>
+   </property>
+  </action>
+  <action name="actionPalette_3">
+   <property name="text">
+    <string>Palette 3</string>
+   </property>
+  </action>
+  <action name="actionPalette_4">
+   <property name="text">
+    <string>Palette 4</string>
+   </property>
+  </action>
+  <action name="actionPalette_5">
+   <property name="text">
+    <string>Palette 5</string>
+   </property>
+  </action>
+  <action name="actionPDF">
+   <property name="text">
+    <string>PDF</string>
+   </property>
+  </action>
+  <action name="actionSpeed_Options_2">
+   <property name="text">
+    <string>Speed Options</string>
+   </property>
+  </action>
+  <action name="actionAdd_Title">
+   <property name="text">
+    <string>Add Title</string>
+   </property>
+  </action>
+  <action name="actionAdd_Title_2">
+   <property name="text">
+    <string>Add Title</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

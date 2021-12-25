@@ -1,0 +1,686 @@
+
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'GUIgodhelpus.ui'
+#
+# Created by: PyQt5 UI code generator 5.9.2
+#
+# WARNING! All changes made in this file will be lost!
+
+from pyqtgraph import PlotWidget
+import pyqtgraph 
+from PyQt5 import QtCore, QtGui, QtWidgets
+#from matplotlib.pyplot import draw
+import pandas as pd
+import matplotlib.pyplot as plt
+from PyQt5.QtWidgets import QApplication, QColorDialog, QFileDialog, QFrame, QWidget, QInputDialog, QLineEdit,QComboBox
+import os
+import numpy as np
+from PyQt5.QtWidgets import QMessageBox
+import sys 
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QColorDialog
+from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtGui import QColor
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+from pyqtgraph.graphicsItems.ImageItem import ImageItem
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+import cv2
+import io
+
+from scipy.signal.spectral import spectrogram
+class SpecCanvas(FigureCanvas):
+
+     def __init__(self, parent=None, width=5, height=4, dpi=100):
+         fig = Figure(figsize = (width , height) , dpi=dpi)
+         self.axes = fig.add_subplot(111)
+         super(SpecCanvas, self).__init__(fig)        
+         fig.tight_layout()
+
+
+class Ui_MainWindow(object):
+   
+
+
+    def setupUi(self, MainWindow):
+
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1384, 696)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(1422, 693)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.signalComboBox = QtWidgets.QComboBox(self.centralwidget)
+        self.signalComboBox.setGeometry(QtCore.QRect(370, 570, 221, 22))
+        self.signalComboBox.setObjectName("SignalComboBox")
+        self.signalComboBox.addItem("")
+        self.signalComboBox.addItem("")
+        self.signalComboBox.addItem("")
+        self.signalComboBox.addItem("")
+        self.pauseButtonCh = QtWidgets.QPushButton(self.centralwidget)
+        self.pauseButtonCh.setGeometry(QtCore.QRect(190, 520, 75, 23))
+        self.pauseButtonCh.setObjectName("pauseButtonCh")
+        self.slowerButtonCh = QtWidgets.QPushButton(self.centralwidget)
+        self.slowerButtonCh.setGeometry(QtCore.QRect(510, 520, 75, 23))
+        self.slowerButtonCh.setObjectName("slowerButtonCh")
+        self.zoomOutButtonCh = QtWidgets.QPushButton(self.centralwidget)
+        self.zoomOutButtonCh.setGeometry(QtCore.QRect(350, 520, 75, 23))
+        self.zoomOutButtonCh.setObjectName("zoomOutButtonCh")
+        self.showButtonCh = QtWidgets.QPushButton(self.centralwidget)
+        self.showButtonCh.setGeometry(QtCore.QRect(670, 520, 75, 23))
+        self.showButtonCh.setObjectName("showButtonCh")
+        self.zoomInButtonCh = QtWidgets.QPushButton(self.centralwidget)
+        self.zoomInButtonCh.setGeometry(QtCore.QRect(270, 520, 75, 23))
+        self.zoomInButtonCh.setObjectName("zoomInButtonCh")
+        self.spectroButtonCh = QtWidgets.QPushButton(self.centralwidget)
+        self.spectroButtonCh.setGeometry(QtCore.QRect(430, 520, 75, 23))
+        self.spectroButtonCh.setObjectName("spectroButtonCh")
+        self.hideButtonCh = QtWidgets.QPushButton(self.centralwidget)
+        self.hideButtonCh.setGeometry(QtCore.QRect(750, 520, 75, 23))
+        self.hideButtonCh.setObjectName("hideButtonCh")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(30, 520, 61, 21))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label.setFont(font)
+        self.label.setObjectName("label")
+        self.playButtonCh = QtWidgets.QPushButton(self.centralwidget)
+        self.playButtonCh.setGeometry(QtCore.QRect(110, 520, 75, 23))
+        self.playButtonCh.setObjectName("playButtonCh")
+        self.fasterButtonCh = QtWidgets.QPushButton(self.centralwidget)
+        self.fasterButtonCh.setGeometry(QtCore.QRect(590, 520, 75, 23))
+        self.fasterButtonCh.setObjectName("fasterButtonCh")
+        self.addLabelButton = QtWidgets.QPushButton(self.centralwidget)
+        self.addLabelButton.setGeometry(QtCore.QRect(830, 520, 75, 23))
+        self.addLabelButton.setObjectName("addLabelButton")
+        self.spectroMinSlider = QtWidgets.QSlider(self.centralwidget)
+        self.spectroMinSlider.setGeometry(QtCore.QRect(990, 480, 160, 22))
+        self.spectroMinSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.spectroMinSlider.setObjectName("spectroMinSlider")
+        self.spectroMaxSlider = QtWidgets.QSlider(self.centralwidget)
+        self.spectroMaxSlider.setGeometry(QtCore.QRect(1220, 480, 160, 22))
+        self.spectroMaxSlider.setOrientation(QtCore.Qt.Horizontal)
+        self.spectroMaxSlider.setObjectName("spectroMaxSlider")
+        self.splitter = QtWidgets.QSplitter(self.centralwidget)
+        self.splitter.setGeometry(QtCore.QRect(40, 80, 1271, 361))
+        self.splitter.setOrientation(QtCore.Qt.Horizontal)
+        self.splitter.setObjectName("splitter")
+
+        self.spectroMinSlider.valueChanged.connect(lambda: self.maxSlider()) 
+        self.spectroMaxSlider.valueChanged.connect(lambda: self.minSlider())
+        
+        #def maxSliderValue(self):
+        #    self.minSlider(self.spectroMaxSlider.value())
+
+        #def minSliderValue(self):
+        #    self.minSlider(self.spectroMinSlider.value())
+        
+        
+        #Our plotting widget
+        self.graphCh1Container=QtWidgets.QWidget(self.splitter)
+        self.graphCh1=pyqtgraph.GraphicsLayoutWidget(self.graphCh1Container)
+        
+        self.graphCh1.setGeometry(QtCore.QRect(20, 60, 1271, 221))
+        self.graphCh1.setObjectName("graphCh1")
+        
+        #creating a plot (axis ..etc)
+        p1=self.graphCh1.addPlot()   
+        #to put the limits of our graph .. solved compression problem)
+        #coz it controls range of axis in the single frame
+        p1.setXRange(0, 20, padding=0)     
+        p1.setLimits(xMin=0)
+        #defining our 3 curves
+        self.curve1 = p1.plot()
+        self.curve2 = p1.plot()
+        self.curve3 = p1.plot()
+        self.spectrogram = PlotWidget(self.splitter)
+        self.spectrogram.setObjectName("spectrogram")
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1422, 26))
+        self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
+        self.menuOpen = QtWidgets.QMenu(self.menuFile)
+        self.menuOpen.setObjectName("menuOpen")
+        self.menuActions = QtWidgets.QMenu(self.menubar)
+        self.menuActions.setObjectName("menuActions")
+        self.menuChannel_1 = QtWidgets.QMenu(self.menuActions)
+        self.menuChannel_1.setObjectName("menuChannel_1")
+        self.menuChannel_2 = QtWidgets.QMenu(self.menuActions)
+        self.menuChannel_2.setObjectName("menuChannel_2")
+        self.menuChannel_3 = QtWidgets.QMenu(self.menuActions)
+        self.menuChannel_3.setObjectName("menuChannel_3")
+        self.menuSpectrogram_Actions = QtWidgets.QMenu(self.menubar)
+        self.menuSpectrogram_Actions.setObjectName("menuSpectrogram_Actions")
+        self.menuColor_Palettes = QtWidgets.QMenu(self.menuSpectrogram_Actions)
+        self.menuColor_Palettes.setObjectName("menuColor_Palettes")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.actionChannel_1 = QtWidgets.QAction(MainWindow)
+        self.actionChannel_1.setObjectName("actionChannel_1")
+        self.actionChannel_2 = QtWidgets.QAction(MainWindow)
+        self.actionChannel_2.setObjectName("actionChannel_2")
+        self.actionChannel_3 = QtWidgets.QAction(MainWindow)
+        self.actionChannel_3.setObjectName("actionChannel_3")
+        self.actionSave_as_PDF = QtWidgets.QAction(MainWindow)
+        self.actionSave_as_PDF.setObjectName("actionSave_as_PDF")
+        self.actionExit = QtWidgets.QAction(MainWindow)
+        self.actionExit.setObjectName("actionExit")
+        self.actionChange_Color = QtWidgets.QAction(MainWindow)
+        self.actionChange_Color.setObjectName("actionChange_Color")
+        self.actionChange_Color_2 = QtWidgets.QAction(MainWindow)
+        self.actionChange_Color_2.setObjectName("actionChange_Color_2")
+        self.actionChange_Color_3 = QtWidgets.QAction(MainWindow)
+        self.actionChange_Color_3.setObjectName("actionChange_Color_3")
+        self.actionAdd_Title = QtWidgets.QAction(MainWindow)
+        self.actionAdd_Title.setObjectName("actionAdd_Title")
+        self.actionAdd_Titlee = QtWidgets.QAction(MainWindow)
+        self.actionAdd_Titlee.setObjectName("actionAdd_Titlee")
+        self.actionAdd_Title_2 = QtWidgets.QAction(MainWindow)
+        self.actionAdd_Title_2.setObjectName("actionAdd_Title_2")
+        self.actionPalette_1 = QtWidgets.QAction(MainWindow)
+        self.actionPalette_1.setObjectName("actionPalette_1")
+        self.actionPalette_2 = QtWidgets.QAction(MainWindow)
+        self.actionPalette_2.setObjectName("actionPalette_2")
+        self.actionPalette_3 = QtWidgets.QAction(MainWindow)
+        self.actionPalette_3.setObjectName("actionPalette_3")
+        self.actionPalette_4 = QtWidgets.QAction(MainWindow)
+        self.actionPalette_4.setObjectName("actionPalette_4")
+        self.actionPalette_5 = QtWidgets.QAction(MainWindow)
+        self.actionPalette_5.setObjectName("actionPalette_5")
+        self.actionChannel_7 = QtWidgets.QAction(MainWindow)
+        self.actionChannel_7.setObjectName("actionChannel_7")
+        self.actionChannel_8 = QtWidgets.QAction(MainWindow)
+        self.actionChannel_8.setObjectName("actionChannel_8")
+        self.actionChannel_9 = QtWidgets.QAction(MainWindow)
+        self.actionChannel_9.setObjectName("actionChannel_9")
+        self.actionChannel_10 = QtWidgets.QAction(MainWindow)
+        self.actionChannel_10.setObjectName("actionChannel_10")
+        self.actionChannel_11 = QtWidgets.QAction(MainWindow)
+        self.actionChannel_11.setObjectName("actionChannel_11")
+        self.menuOpen.addAction(self.actionChannel_1)
+        self.menuOpen.addAction(self.actionChannel_2)
+        self.menuOpen.addAction(self.actionChannel_3)
+        self.menuFile.addAction(self.menuOpen.menuAction())
+        self.menuFile.addAction(self.actionSave_as_PDF)
+        self.menuFile.addAction(self.actionExit)
+        self.menuChannel_1.addAction(self.actionChange_Color)
+        self.menuChannel_2.addAction(self.actionChange_Color_2)
+        self.menuChannel_3.addAction(self.actionChange_Color_3)
+        self.menuActions.addAction(self.menuChannel_1.menuAction())
+        self.menuActions.addAction(self.menuChannel_2.menuAction())
+        self.menuActions.addAction(self.menuChannel_3.menuAction())
+        self.menuColor_Palettes.addAction(self.actionPalette_1)
+        self.menuColor_Palettes.addAction(self.actionPalette_2)
+        self.menuColor_Palettes.addAction(self.actionPalette_3)
+        self.menuColor_Palettes.addAction(self.actionPalette_4)
+        self.menuColor_Palettes.addAction(self.actionPalette_5)
+        self.menuSpectrogram_Actions.addAction(self.menuColor_Palettes.menuAction())
+        self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuActions.menuAction())
+        self.menubar.addAction(self.menuSpectrogram_Actions.menuAction())
+
+        self.channel="Ch1"
+        self.timer1 = QtCore.QTimer()
+        self.timer2 = QtCore.QTimer()
+        self.timer3 = QtCore.QTimer()   
+
+        self.rmin = 0
+        self.rmax = 256
+        self.gmin = 0
+        self.gmax = 256
+        self.bmin = 0
+        self.bmax = 256
+
+        self.timerInterval = 100
+        self.penColorIndex1=1
+        self.penColorIndex2=1
+        self.color = "#ffaa00"
+        self.label1 = "CHANNEL 1"
+        self.palette = "viridis"
+
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.signalComboBox.setCurrentText(_translate("MainWindow", "Choose a channel"))
+        self.signalComboBox.setItemText(0, _translate("MainWindow", "Choose a channel"))
+        self.signalComboBox.setItemText(1, _translate("MainWindow", "Ch1"))
+        self.signalComboBox.setItemText(2, _translate("MainWindow", "Ch2"))
+        self.signalComboBox.setItemText(3, _translate("MainWindow", "Ch3"))
+        self.pauseButtonCh.setText(_translate("MainWindow", "Pause"))
+        self.pauseButtonCh.setShortcut(_translate("MainWindow", "P"))
+        self.slowerButtonCh.setText(_translate("MainWindow", "Slower"))
+        self.slowerButtonCh.setShortcut(_translate("MainWindow", "W"))
+        self.zoomOutButtonCh.setText(_translate("MainWindow", "Zoom out"))
+        self.zoomOutButtonCh.setShortcut(_translate("MainWindow", "-"))
+        self.showButtonCh.setText(_translate("MainWindow", "Show"))
+        self.showButtonCh.setShortcut(_translate("MainWindow", "G"))
+        self.zoomInButtonCh.setText(_translate("MainWindow", "Zoom in"))
+        self.zoomInButtonCh.setShortcut(_translate("MainWindow", "+"))
+        self.spectroButtonCh.setText(_translate("MainWindow", "Spectro"))
+        self.spectroButtonCh.setShortcut(_translate("MainWindow", "Q"))
+        self.hideButtonCh.setText(_translate("MainWindow", "Hide"))
+        self.hideButtonCh.setShortcut(_translate("MainWindow", "H"))
+        self.label.setText(_translate("MainWindow", "Controls"))
+        self.playButtonCh.setText(_translate("MainWindow", "Play"))
+        self.playButtonCh.setShortcut(_translate("MainWindow", "S"))
+        self.fasterButtonCh.setText(_translate("MainWindow", "Faster"))
+        self.fasterButtonCh.setShortcut(_translate("MainWindow", "F"))
+        self.addLabelButton.setText(_translate("MainWindow", "Add Label"))
+        self.addLabelButton.setShortcut(_translate("MainWindow", "L"))
+        self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.menuOpen.setTitle(_translate("MainWindow", "Open"))
+        self.menuActions.setTitle(_translate("MainWindow", "Actions"))
+        self.menuChannel_1.setTitle(_translate("MainWindow", "Channel 1"))
+        self.menuChannel_2.setTitle(_translate("MainWindow", "Channel 2"))
+        self.menuChannel_3.setTitle(_translate("MainWindow", "Channel 3"))
+        self.menuSpectrogram_Actions.setTitle(_translate("MainWindow", "Spectrogram Actions"))
+        self.menuColor_Palettes.setTitle(_translate("MainWindow", "Color Palettes"))
+        self.actionChannel_1.setText(_translate("MainWindow", "Channel 1"))
+        self.actionChannel_2.setText(_translate("MainWindow", "Channel 2"))
+        self.actionChannel_3.setText(_translate("MainWindow", "Channel 3"))
+        self.actionSave_as_PDF.setText(_translate("MainWindow", "Save as PDF"))
+        self.actionSave_as_PDF.setShortcut(_translate("MainWindow", "Ctrl+S"))
+        self.actionExit.setText(_translate("MainWindow", "Exit"))
+        self.actionExit.setShortcut(_translate("MainWindow", "esc"))
+        self.actionChange_Color.setText(_translate("MainWindow", "Change Color"))
+        self.actionChange_Color_2.setText(_translate("MainWindow", "Change Color"))
+        self.actionChange_Color_3.setText(_translate("MainWindow", "Change Color"))
+        self.actionAdd_Title.setText(_translate("MainWindow", "Add Title"))
+        self.actionAdd_Titlee.setText(_translate("MainWindow", "Add Title"))
+        self.actionAdd_Title_2.setText(_translate("MainWindow", "Add Title"))
+        self.actionPalette_1.setText(_translate("MainWindow", 'gray'))
+        self.actionPalette_2.setText(_translate("MainWindow", 'hsv'))
+        self.actionPalette_3.setText(_translate("MainWindow", 'summer'))
+        self.actionPalette_4.setText(_translate("MainWindow", 'viridis'))
+        self.actionPalette_5.setText(_translate("MainWindow", 'turbo'))
+        self.actionChannel_7.setText(_translate("MainWindow", "Channel 4"))
+        self.actionChannel_8.setText(_translate("MainWindow", "Channel 5"))
+        self.actionChannel_9.setText(_translate("MainWindow", "Channel 6"))
+        self.actionChannel_10.setText(_translate("MainWindow", "Channel 4"))
+        self.actionChannel_11.setText(_translate("MainWindow", "Channel 5"))
+        self.signalComboBox.currentTextChanged.connect(lambda: self.channelComboBox())
+        self.actionExit.triggered.connect(lambda: self.exitApp())
+        self.menuOpen.triggered.connect(lambda: self.channelComboBox())
+        self.zoomInButtonCh.clicked.connect(lambda: self.zoomIn(self.channel))
+        self.zoomOutButtonCh.clicked.connect(lambda: self.zoomOut(self.channel))
+        self.playButtonCh.clicked.connect(lambda: self.playCh(self.channel))
+        self.pauseButtonCh.clicked.connect(lambda: self.pauseCh1(self.channel))
+        self.spectroButtonCh.clicked.connect(lambda: self.spectro(self.channel))
+        self.slowerButtonCh.clicked.connect(lambda: self.slow(self.channel,self.timerInterval))
+        self.fasterButtonCh.clicked.connect(lambda: self.fast(self.channel,self.timerInterval))
+        self.showButtonCh.clicked.connect(lambda: self.show(self.channel))
+        self.hideButtonCh.clicked.connect(lambda: self.hide(self.channel))
+        self.actionChange_Color.triggered.connect(lambda: self.colorPicker())
+        self.actionChange_Color_2.triggered.connect(lambda: self.colorPicker())
+        self.actionChange_Color_3.triggered.connect(lambda: self.colorPicker())
+        self.actionPalette_1.triggered.connect(lambda : self.setpalette(self.actionPalette_1.text))
+        self.actionPalette_2.triggered.connect(lambda : self.setpalette(self.actionPalette_2.text))
+        self.actionPalette_3.triggered.connect(lambda : self.setpalette(self.actionPalette_3.text))
+        self.actionPalette_4.triggered.connect(lambda : self.setpalette(self.actionPalette_4.text))
+        self.actionPalette_5.triggered.connect(lambda : self.setpalette(self.actionPalette_5.text))
+        self.sc = SpecCanvas(self, width=4, height=5, dpi=100)
+        self.layout = QtWidgets.QVBoxLayout()
+        self.layout.addWidget(self.sc)
+
+        
+    def setpalette(self , txt):  
+        self.palette = txt
+        self.spectro(self.channel)
+
+    def channelComboBox(self):
+        self.channel=self.signalComboBox.currentText()
+        if self.channel =="Ch1":
+            self.open_file()
+        elif self.channel=="Ch2":
+            self.open_file2()
+        else :
+            self.open_file3()
+
+
+
+    def open_file(self):
+      """opens a file from the brower """
+      file_path=QFileDialog.getOpenFileName()
+      file_name=file_path[0].split('/')[-1]
+      self.read_data(file_name)
+
+    def open_file2(self):
+      """opens a file from the brower """
+      file_path=QFileDialog.getOpenFileName()
+      file_name=file_path[0].split('/')[-1]
+      self.read_data2(file_name)
+
+    def open_file3(self):
+      """opens a file from the brower """
+      file_path=QFileDialog.getOpenFileName()
+      file_name=file_path[0].split('/')[-1]
+      self.read_data3(file_name)
+
+
+
+    def read_data(self,file_name):
+        """loads the data from chosen file"""
+        df1=pd.read_csv(file_name)
+        self.label1=file_name
+        time1=list(pd.to_numeric(df1['time'],downcast="float"))
+        amp1=list(pd.to_numeric(df1['amplitude'],downcast="float"))
+        self.draw(time1,amp1,self.color)
+            
+    def read_data2(self,file_name):
+        """loads the data from chosen file"""  
+        df2=pd.read_csv(file_name)
+        self.label2=file_name  #trial
+        time2=list(pd.to_numeric(df2['time'],downcast="float"))
+        amp2=list(pd.to_numeric(df2['amplitude'],downcast="float"))
+        self.draw2(time2,amp2,self.color)
+
+    def read_data3(self,file_name):
+        """loads the data from chosen file"""
+        df3=pd.read_csv(file_name)
+        self.label3=file_name
+        time3=list(pd.to_numeric(df3['time'],downcast="float"))
+        amp3=list(pd.to_numeric(df3['amplitude'],downcast="float"))
+        self.draw3(time3,amp3,self.color)
+    
+    def draw(self,time,amp,color):
+        """sets up our canvas to plot"""
+        self.time = time
+        self.amp=amp
+        self.index=0  
+        pen = pyqtgraph.mkPen(color) #signal color
+        self.curve1.setData(self.time[0:self.index+500], self.amp[0:self.index+500], pen=pen)
+        self.timer1.setInterval(100)
+        self.timer1.timeout.connect(lambda:self.update_plot_data(self.time,self.amp))
+        self.timer1.start()
+                            
+
+    def draw2(self,time2,amp2,color):
+        """sets up our canvas to plot"""
+        self.time2 = time2
+        self.amp2=amp2
+        self.index2=0  
+        pen = pyqtgraph.mkPen(color) #signal color
+        self.curve2.setData(self.time2[0:self.index2+500], self.amp2[0:self.index2+500], pen=pen)
+        self.timer2.setInterval(100)
+        self.timer2.timeout.connect(lambda:self.update_plot_data2(self.time2,self.amp2))
+        self.timer2.start()
+
+    def draw3(self,time3,amp3,color):
+        """sets up our canvas to plot"""
+        self.time3 = time3
+        self.amp3=amp3
+        self.index3=0  
+        pen = pyqtgraph.mkPen(color) #signal color
+        self.curve3.setData(self.time3[0:self.index3+500], self.amp3[0:self.index3+500], pen=pen)
+        self.timer3.setInterval(100)
+        self.timer3.timeout.connect(lambda:self.update_plot_data3(self.time3,self.amp3))
+        self.timer3.start()                     
+
+
+    def update_plot_data(self,time,amp): 
+        """updates the data plotted on graph to get dynamic signal"""
+        
+        dynamic_time = time[0:self.index+500]  
+        dynamic_amp = amp[0:self.index+500]
+        self.index=self.index+500
+    
+        if self.index+500>len(time):
+            self.index=0
+
+        self.curve1.setData(dynamic_time, dynamic_amp)  # Update the data  
+
+    def update_plot_data2(self,time2,amp2): 
+        """updates the data plotted on graph to get dynamic signal"""
+        
+        dynamic_time2 = time2[0:self.index2+500]  
+        dynamic_amp2 = amp2[0:self.index2+500]
+        self.index2=self.index2+500
+    
+        if self.index2+500>len(time2):
+            self.index2=0
+
+        self.curve2.setData(dynamic_time2, dynamic_amp2)  # Update the data 
+
+    def update_plot_data3(self,time3,amp3): 
+        """updates the data plotted on graph to get dynamic signal"""
+        
+        dynamic_time3 = time3[0:self.index3+500]  
+        dynamic_amp3 = amp3[0:self.index3+500]
+        self.index3=self.index3+500
+    
+        if self.index3+500>len(time3):
+            self.index3=0
+
+        self.curve3.setData(dynamic_time3, dynamic_amp3)  # Update the data  
+    def colorPicker(self):
+        self.on_click()
+
+    @pyqtSlot()
+    def on_click(self):
+        self.openColorDialog()
+
+    def openColorDialog(self):
+        color = QColorDialog.getColor()
+        self.color=color
+        if color.isValid():
+            print(color.name())
+    
+
+
+    def exitApp(self):
+        sys.exit()
+
+
+
+    def addTitle(self, ch):
+        if ch=="Ch1":
+            self.label.setText(self.label1)
+            self.update()
+        else:
+            self.label_2.setText(self.label2)
+            self.update()
+
+
+    def zoomOut(self,ch):
+        
+        self.graphCh1.plot.getViewBox().scaleBy((2,2))
+               
+
+    def zoomIn(self,ch):
+       
+        self.graphCh1.plot.getViewBox().scaleBy((0.5,0.5))
+        
+  
+    def playCh(self, channel):
+        if channel =="Ch1":
+            self.timer1.start()
+        elif channel=="Ch2":
+            self.timer2.start()
+        else:
+            self.timer3.start()
+
+
+
+    def pauseCh1(self, channel):
+        """pauses the dynamic signal in ch1"""
+        if channel =="Ch1":
+            self.timer1.stop()
+        elif channel=="Ch2":
+            self.timer2.stop()
+        else:
+            self.timer3.stop() 
+
+
+    def slow(self,channel,timerInterval):
+        self.timerInterval = self.timerInterval * 2
+        if channel== "Ch1": 
+            self.timer1.setInterval(self.timerInterval)
+        elif channel =="Ch2":
+            self.timer2.setInterval(self.timerInterval)
+        else:
+            self.timer3.setInterval(self.timerInterval)
+        
+
+    def fast(self,channel,timerInterval):
+        self.timerInterval = self.timerInterval / 2
+        if channel == "Ch1":
+            self.timer1.setInterval(self.timerInterval)
+        elif channel=="Ch2":
+            self.timer2.setInterval(self.timerInterval)
+        else:
+            self.timer3.setInterval(self.timerInterval)
+       
+
+    def show(self,ch):
+        if ch== "Ch1":
+            self.penColorIndex1=1
+        elif ch== "Ch2":
+            self.penColorIndex2=1
+        else:
+            self.penColorIndex3=1
+
+    def hide(self,ch):
+        if ch== "Ch1":
+            self.penColorIndex1=0
+        elif ch== "Ch2":
+            self.penColorIndex2=0
+        else:
+            self.penColorIndex3=0
+       
+
+    def maxSlider(self):
+        slider_value=self.spectroMaxSlider.value()
+        self.rmax=slider_value 
+        self.gmax=slider_value   
+        self.bmax=slider_value 
+        self.spectroPixel(self)
+        
+
+    def minSlider(self):
+        slider_value=self.spectroMinSlider.value()
+        self.rmin=slider_value 
+        self.gmin=slider_value  
+        self.bmin=slider_value
+        self.spectroPixel(self)
+    
+    def spectroPixel(self):
+        self.specimage = self.figToImg(self.fig ,dpi=90)
+        self.img = np.rot90(self.img , k=1 , axes= (1,0))
+        self.image = pyqtgraph.ImageItem(self.img)
+        self.image.setLevels([[ self.rmin , self.rmax] , [ self.gmin , self.gmax], [ self.bmin , self.bmax]])
+        self.spectrogram.clear()
+        self.plotGraph.addItem(self.image)
+       
+
+    def figToImg(self ,fig ,dpi = 90):
+        buf = io.BytesIO()
+        fig.savefig(buf, format="jpeg", dpi=dpi)
+        buf.seek(0)
+        arrimg = np.frombuffer(buf.getvalue(), dtype=np.uint8)
+        print(buf.getvalue())
+        buf.close()
+        self.img = cv2.imdecode(arrimg, 1)
+        self.img = cv2.cvtColor(self.img, cv2.COLOR_BGR2RGB)
+        return self.img
+    
+    def spectro(self , channel):
+        if channel =="Ch1":
+            fig=plt.figure()
+            self.spec_gram = plt.specgram(self.amp, Fs=200 , cmap = self.palette)
+            self.plotGraph = pyqtgraph.PlotItem()
+            pyqtgraph.PlotItem.enableAutoScale(self.plotGraph)
+            pyqtgraph.PlotItem.hideAxis(self.plotGraph,'left')
+            pyqtgraph.PlotItem.hideAxis(self.plotGraph,'bottom')
+            self.spectrogram.setCentralItem(self.plotGraph)
+            self.img=self.figToImg(fig)
+            self.img = np.rot90(self.img , k=1 , axes= (1,0))
+            self.image = pyqtgraph.ImageItem(self.img)
+            self.image.setLevels([[ self.rmin , self.rmax] , [ self.gmin , self.gmax], [ self.bmin , self.bmax]])
+            self.plotGraph.addItem(self.image)
+        elif channel =="Ch2":
+            fig=plt.figure()
+            self.spec_gram = plt.specgram(self.amp2, Fs=256 , cmap = self.palette)
+            self.plotGraph = pyqtgraph.PlotItem()
+            pyqtgraph.PlotItem.enableAutoScale(self.plotGraph)
+            pyqtgraph.PlotItem.hideAxis(self.plotGraph,'left')
+            pyqtgraph.PlotItem.hideAxis(self.plotGraph,'bottom')
+            self.spectrogram.setCentralItem(self.plotGraph)
+            self.img=self.figToImg(fig)
+            self.img = np.rot90(self.img , k=1 , axes= (1,0))
+            self.image = pyqtgraph.ImageItem(self.img)
+            self.image.setLevels([[ self.rmin , self.rmax] , [ self.gmin , self.gmax], [ self.bmin , self.bmax]])
+            self.plotGraph.addItem(self.image)
+        elif channel == "Ch3":
+            fig=plt.figure()
+            self.spec_gram = plt.specgram(self.amp3, Fs=256 , cmap = self.palette)
+            self.plotGraph = pyqtgraph.PlotItem()
+            pyqtgraph.PlotItem.enableAutoScale(self.plotGraph)
+            pyqtgraph.PlotItem.hideAxis(self.plotGraph,'left')
+            pyqtgraph.PlotItem.hideAxis(self.plotGraph,'bottom')
+            self.spectrogram.setCentralItem(self.plotGraph)
+            self.img=self.figToImg(fig)
+            self.img = np.rot90(self.img , k=1 , axes= (1,0))
+            self.image = pyqtgraph.ImageItem(self.img)
+            #self.image.setLevels([[ self.rmin , self.rmax] , [ self.gmin , self.gmax], [ self.bmin , self.bmax]])
+            self.plotGraph.addItem(self.image)
+        else:
+            pass
+
+    # def spectro(self,channel):
+    
+    #     if channel=="Ch1":
+    #         if not self.amp:
+    #             pass
+    #         else:   
+    #             self.sc.axes.specgram(self.amp , Fs =5 )
+    #             #self.plotGraph.setBackgroundColor((0, 256, 256))
+    #             self.sc.draw()
+    #             # self.spectrogram.clear()
+    #             # self.spectrogram.removeItem(self.layout)         
+            
+    #     elif channel =="Ch2":
+    #         if not self.amp2:
+    #             pass
+    #         else:   
+    #             self.sc.axes.specgram(self.amp2 , Fs =5 )  
+    #             # self.layout.addWidget(self.sc)
+    #             # self.spectrogram.clear()
+    #             self.sc.draw()
+
+    #     else:
+    #         if not self.amp3:
+    #             pass
+    #         else:   
+    #             self.sc.canvas.axes.specgram(self.amp3 , Fs =5 )  
+    #             # self.layout.addWidget(sc)
+    #             # self.spectrogram.clear()
+    #             self.sc.draw()
+    #             # self.spectrogram.setLayout(self.layout)  
+   
+
+              
+             
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())
+
