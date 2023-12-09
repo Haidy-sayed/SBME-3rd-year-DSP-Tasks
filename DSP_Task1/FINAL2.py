@@ -754,6 +754,7 @@ class Ui_MainWindow(object):
         return self.img
     
     def spectro(self , channel):
+        print("IN SPECTRO")
         if channel =="Ch1":
             if not self.amp1:
                  pass
@@ -805,9 +806,7 @@ class Ui_MainWindow(object):
         else:
             pass
                 
-   
 
-              
              
 
 if __name__ == "__main__":

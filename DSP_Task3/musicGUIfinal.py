@@ -218,35 +218,35 @@ class Ui_MainWindow(object):
         self.piano = QLabel(self.Equalizer_5)
         self.piano.setObjectName(u"piano")
         self.piano.setGeometry(QRect(310, 70, 61, 51))
-        self.piano.setPixmap(QPixmap(u"../final/piano.jpg"))
+        self.piano.setPixmap(QPixmap(u"Images/piano.jpg"))
         self.piano.setScaledContents(True)
         self.guitar = QLabel(self.Equalizer_5)
         self.guitar.setObjectName(u"guitar")
         self.guitar.setGeometry(QRect(110, 70, 61, 51))
-        self.guitar.setPixmap(QPixmap(u"../final/giutar.jpeg"))
+        self.guitar.setPixmap(QPixmap(u"Images/giutar.jpeg"))
         self.guitar.setScaledContents(True)
         self.drums = QLabel(self.Equalizer_5)
         self.drums.setObjectName(u"drums")
         self.drums.setGeometry(QRect(430, 70, 61, 61))
-        self.drums.setPixmap(QPixmap(u"../final/drum.jpeg"))
+        self.drums.setPixmap(QPixmap(u"Images/drum.jpeg"))
         self.drums.setScaledContents(True)
 
         self.cello = QLabel(self.Equalizer_5)
         self.cello.setObjectName(u"cello")
         self.cello.setGeometry(QRect(530, 70, 51, 61))
-        self.cello.setPixmap(QPixmap(u"../final/cello.jpg"))
+        self.cello.setPixmap(QPixmap(u"Images/cello.jpg"))
         self.cello.setScaledContents(True)
         
         self.violin = QLabel(self.Equalizer_5)
         self.violin.setObjectName(u"violin")
         self.violin.setGeometry(QRect(210, 70, 61, 51))
-        self.violin.setPixmap(QPixmap(u"../final/violin.jfif"))
+        self.violin.setPixmap(QPixmap(u"Images/violin.jfif"))
         self.violin.setScaledContents(True)
 
         self.flute = QLabel(self.Equalizer_5)
         self.flute.setObjectName(u"flute")
         self.flute.setGeometry(QRect(650, 70, 61, 51))
-        self.flute.setPixmap(QPixmap(u"../final/flute.jfif"))
+        self.flute.setPixmap(QPixmap(u"Images/flute.jfif"))
         self.flute.setScaledContents(True)
 
 
@@ -406,7 +406,7 @@ class Ui_MainWindow(object):
         self.label.setObjectName(u"label")
         self.label.setGeometry(QtCore.QRect(200, 200, 461, 191))
         
-        self.label.setPixmap(QtGui.QPixmap(u"../final/pianoplay2.png"))
+        self.label.setPixmap(QtGui.QPixmap(u"Images/pianoplay2.png"))
         self.label.setScaledContents(True)
         
         self.pianoA = QtWidgets.QPushButton(self.page_20)
@@ -474,7 +474,7 @@ class Ui_MainWindow(object):
         self.label.setObjectName(u"label")
         self.label.setGeometry(QtCore.QRect(160, 150, 531, 291))
         
-        self.label.setPixmap(QtGui.QPixmap(u"../final/bongos1.jpg"))
+        self.label.setPixmap(QtGui.QPixmap(u"Images/bongos1.jpg"))
         self.label.setScaledContents(True)
         
         self.pushButton_21 = QtWidgets.QPushButton(self.page_23)
@@ -492,7 +492,7 @@ class Ui_MainWindow(object):
         self.label_4 = QtWidgets.QLabel(self.page_24)
         self.label_4.setGeometry(QtCore.QRect(150, 120, 671, 391))
         self.label_4.setText("")
-        self.label_4.setPixmap(QtGui.QPixmap("C:/Users/hp/anaconda3/envs/py38/Library/bin/blog-graphics-labeled-drum-kit.jpg"))
+        self.label_4.setPixmap(QtGui.QPixmap("Images/blog-graphics-labeled-drum-kit.jpg"))
         self.label_4.setScaledContents(True)
         self.label_4.setObjectName("label_4")
         self.pushButton_24 = QtWidgets.QPushButton(self.page_24)
@@ -640,11 +640,11 @@ class Ui_MainWindow(object):
         self.pushButton.clicked.connect(lambda : self.backToMenu())
         self.pushButton_4.clicked.connect(lambda : self.backToMenu())
         self.pushButton_5.clicked.connect(lambda : self.backToMenu())
-        self.piano.setIcon(QtGui.QIcon('piano.jpg'))
+        self.piano.setIcon(QtGui.QIcon('Images/piano.jpg'))
         self.piano.setIconSize((QtCore.QSize(453,392)))
-        self.bongos.setIcon(QtGui.QIcon('bongos.jpg'))
+        self.bongos.setIcon(QtGui.QIcon('Images/bongos.jpg'))
         self.bongos.setIconSize((QtCore.QSize(231,352)))
-        self.drums.setIcon(QtGui.QIcon('drum.jpg'))
+        self.drums.setIcon(QtGui.QIcon('Images/drum.jpg'))
         self.drums.setIconSize((QtCore.QSize(493,392)))
         self.pushButton_21.clicked.connect(lambda : self.playRightBango())
         
@@ -955,7 +955,7 @@ class Ui_MainWindow(object):
         fig=plt.figure()
         self.spec_gram = plt.specgram(self.audio_spectro, Fs=200 ,cmap=self.paletteName)
         self.plotGraph = pyqtgraph.PlotItem()
-        pyqtgraph.PlotItem.enableAutoScale(self.plotGraph)
+        pyqtgraph.PlotItem.enableAutoRange(self.plotGraph)
         pyqtgraph.PlotItem.hideAxis(self.plotGraph,'left')
         pyqtgraph.PlotItem.hideAxis(self.plotGraph,'bottom')
         self.SpectroChannel.setCentralItem(self.plotGraph)
@@ -971,96 +971,96 @@ class Ui_MainWindow(object):
     def pianoPlay(self):
      self.stackedWidget.setCurrentIndex(1)
     def playC4 (self):
-        samplerate, data = wavfile.read('C4.wav')
+        samplerate, data = wavfile.read('Notes/C4.wav')
         sd.play(data , samplerate)
     def playD4 (self):
-        samplerate, data = wavfile.read('D4.wav')
+        samplerate, data = wavfile.read('Notes/D4.wav')
         sd.play(data , samplerate)
     def playE4 (self):
-        samplerate, data = wavfile.read('E4.wav')
+        samplerate, data = wavfile.read('Notes/E4.wav')
         sd.play(data , samplerate)
     def playF4 (self):
-        samplerate, data = wavfile.read('F4.wav')
+        samplerate, data = wavfile.read('Notes/F4.wav')
         sd.play(data , samplerate)
     def playG4 (self):
-        samplerate, data = wavfile.read('G4.wav')
+        samplerate, data = wavfile.read('Notes/G4.wav')
         sd.play(data , samplerate)
     def playA4 (self):
-        samplerate, data = wavfile.read('A4.wav')
+        samplerate, data = wavfile.read('Notes/A4.wav')
         sd.play(data , samplerate)
     def playB4 (self):
-        samplerate, data = wavfile.read('B4.wav')
+        samplerate, data = wavfile.read('Notes/B4.wav')
         sd.play(data , samplerate)
     def playDb4 (self):
-        samplerate, data = wavfile.read('Db4.wav')
+        samplerate, data = wavfile.read('Notes/Db4.wav')
         sd.play(data , samplerate)
     def playEb4 (self):
-        samplerate, data = wavfile.read('Eb4.wav')
+        samplerate, data = wavfile.read('Notes/Eb4.wav')
         sd.play(data , samplerate)
     def playGb4 (self):
-        samplerate, data = wavfile.read('Gb4.wav')
+        samplerate, data = wavfile.read('Notes/Gb4.wav')
         sd.play(data , samplerate)
     def playAb4 (self):
-        samplerate, data = wavfile.read('Ab4.wav')
+        samplerate, data = wavfile.read('Notes/Ab4.wav')
         sd.play(data , samplerate)
     def playBb4 (self):
-        samplerate, data = wavfile.read('Bb4.wav')
+        samplerate, data = wavfile.read('Notes/Bb4.wav')
         sd.play(data , samplerate)
     def playC5 (self):
-        samplerate, data = wavfile.read('C5.wav')
+        samplerate, data = wavfile.read('Notes/C5.wav')
         sd.play(data , samplerate)
     def playD5 (self):
-        samplerate, data = wavfile.read('D5.wav')
+        samplerate, data = wavfile.read('Notes/D5.wav')
         sd.play(data , samplerate)
     def playE5(self):
-        samplerate , data = wavfile.read('E5.wav')
+        samplerate , data = wavfile.read('Notes/E5.wav')
         sd.play(data,samplerate)
     def playDb5 (self):
-        samplerate, data = wavfile.read('Db5.wav')
+        samplerate, data = wavfile.read('Notes/Db5.wav')
         sd.play(data , samplerate)
     def playEb5 (self):
-        samplerate, data = wavfile.read('Eb5.wav')
+        samplerate, data = wavfile.read('Notes/Eb5.wav')
         sd.play(data , samplerate)
     def playGb5 (self):
-        samplerate, data = wavfile.read('Gb5.wav')
+        samplerate, data = wavfile.read('Notes/Gb5.wav')
         sd.play(data , samplerate)
     def playAb5 (self):
-        samplerate, data = wavfile.read('Ab5.wav')
+        samplerate, data = wavfile.read('Notes/Ab5.wav')
         sd.play(data , samplerate)
     def playBb5 (self):
-        samplerate, data = wavfile.read('Bb5.wav')
+        samplerate, data = wavfile.read('Notes/Bb5.wav')
         sd.play(data , samplerate)
     
     def playRightBango(self):
-        samplerate, data = wavfile.read('bongoright.wav')
+        samplerate, data = wavfile.read('Notes/bongoright.wav')
         sd.play(data , samplerate)
     def playLeftBango(self):
-        samplerate, data = wavfile.read('bongoleft.wav')
+        samplerate, data = wavfile.read('Notes/bongoleft.wav')
         sd.play(data , samplerate)
 
     def playFloorTom(self):
-        samplerate, data = wavfile.read('Floor-Tom-Drum.wav')
+        samplerate, data = wavfile.read('Notes/Floor-Tom-Drum.wav')
         sd.play(data , samplerate)
     def playRideCymbal(self):
-        samplerate, data = wavfile.read('Ride-Cymbal.wav')
+        samplerate, data = wavfile.read('Notes/Ride-Cymbal.wav')
         sd.play(data , samplerate)
     def playHiHat(self):
-        samplerate, data = wavfile.read('Hi-Hat-1.wav')
+        samplerate, data = wavfile.read('Notes/Hi-Hat-1.wav')
         sd.play(data , samplerate)
     def playHighTom(self):
-        samplerate, data = wavfile.read('high-tom.wav')
+        samplerate, data = wavfile.read('Notes/high-tom.wav')
         sd.play(data , samplerate)
     def playCrashCymbal(self):
-        samplerate, data = wavfile.read('China-Cymbal.wav')
+        samplerate, data = wavfile.read('Notes/China-Cymbal.wav')
         sd.play(data , samplerate)
     def playSnareDrum(self):
-        samplerate, data = wavfile.read('Snare-Drum.wav')
+        samplerate, data = wavfile.read('Notes/Snare-Drum.wav')
         sd.play(data , samplerate)
     def playMidTom(self):
-        samplerate, data = wavfile.read('Medium-Tom-Drum.wav')
+        samplerate, data = wavfile.read('Notes/Medium-Tom-Drum.wav')
         sd.play(data , samplerate)
     def playBuss(self): 
-        samplerate, data = wavfile.read('Bass-Drum-Hit.wav')
+        samplerate, data = wavfile.read('Notes/Bass-Drum-Hit.wav')
         sd.play(data , samplerate)
         
     def BongosPlay(self):

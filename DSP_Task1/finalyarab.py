@@ -244,7 +244,7 @@ class Ui_MainWindow(object):
 
     
 
-        self.timerInterval = 100
+        self.timerInterval = 200
         self.penColorIndex1=1
         self.penColorIndex2=1
         self.color = "#ffaa00"    
