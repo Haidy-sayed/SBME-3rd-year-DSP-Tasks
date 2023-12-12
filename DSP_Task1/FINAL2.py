@@ -381,13 +381,13 @@ class Ui_MainWindow(object):
 
 
 
-        #declaring necessary globals 
-        global time1
-        global amp1
-        global time2
-        global amp2
-        global time3
-        global amp3
+    #declaring necessary globals 
+    global time1
+    global amp1
+    global time2
+    global amp2
+    global time3
+    global amp3
         
 
     def scroll(self, val):
@@ -432,13 +432,7 @@ class Ui_MainWindow(object):
         return stats
 
     def gen_pdf(self):
-        """creates a pdf containing stats and pic"""
-        global time1
-        global amp1
-        global time2
-        global amp2    
-        global time3
-        global amp3          
+        """creates a pdf containing stats and pic"""        
         exporter = pyqtgraph.exporters.ImageExporter(self.graphCh1.scene())
         exporter.export('the_graph.png') 
         exporter2=pyqtgraph.exporters.ImageExporter(self.spectrogram.scene())
