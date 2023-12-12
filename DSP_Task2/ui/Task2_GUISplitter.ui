@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>718</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QWidget" name="samplingContainer" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <widget class="QLabel" name="label_mainChannel">
+       <property name="geometry">
+        <rect>
+         <x>9</x>
+         <y>9</y>
+         <width>77</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Main Channel</string>
+       </property>
+      </widget>
+      <widget class="QSlider" name="samplingSlider">
+       <property name="geometry">
+        <rect>
+         <x>9</x>
+         <y>510</y>
+         <width>84</width>
+         <height>22</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="mouseTracking">
+        <bool>false</bool>
+       </property>
+       <property name="maximum">
+        <number>3</number>
+       </property>
+       <property name="tracking">
+        <bool>true</bool>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="invertedAppearance">
+        <bool>false</bool>
+       </property>
+       <property name="invertedControls">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QSplitter" name="splitter">
+       <property name="geometry">
+        <rect>
+         <x>-11</x>
+         <y>31</y>
+         <width>711</width>
+         <height>471</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <widget class="QWidget" name="mainChannel" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QWidget" name="secondaryChannel" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>200</height>
+         </size>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>718</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_file"/>
+    <addaction name="actionSave_as_PDF"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuSample">
+    <property name="title">
+     <string>Signal processes</string>
+    </property>
+    <addaction name="actionSampling"/>
+    <addaction name="actionRe_construction"/>
+    <addaction name="actionShow_on_secondary_channel"/>
+    <addaction name="actionHide_secondary_channel"/>
+    <addaction name="actionShow_reconstructed_on_main_channel"/>
+   </widget>
+   <widget class="QMenu" name="menuComposer">
+    <property name="title">
+     <string>Composer</string>
+    </property>
+    <addaction name="actionOpen_composer_window"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuComposer"/>
+   <addaction name="menuSample"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen_file">
+   <property name="text">
+    <string>Open file</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+O</string>
+   </property>
+  </action>
+  <action name="actionSave_as_PDF">
+   <property name="text">
+    <string>Save as PDF</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+S</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+   <property name="shortcut">
+    <string>Esc</string>
+   </property>
+  </action>
+  <action name="actionCompose_signal">
+   <property name="text">
+    <string>Compose signal</string>
+   </property>
+  </action>
+  <action name="actionSampling">
+   <property name="text">
+    <string>Sample</string>
+   </property>
+  </action>
+  <action name="actionRe_construction">
+   <property name="text">
+    <string>Re-construction</string>
+   </property>
+  </action>
+  <action name="actionShow_on_secondary_channel">
+   <property name="text">
+    <string>Show on secondary channel</string>
+   </property>
+  </action>
+  <action name="actionHide_secondary_channel">
+   <property name="text">
+    <string>Hide secondary channel</string>
+   </property>
+  </action>
+  <action name="actionSave_composed_as">
+   <property name="text">
+    <string>Save composed as</string>
+   </property>
+  </action>
+  <action name="actionShow_reconstructed_on_main_channel">
+   <property name="text">
+    <string>Show reconstructed on main channel</string>
+   </property>
+  </action>
+  <action name="actionOpen_composer_window">
+   <property name="text">
+    <string>Open composer window</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

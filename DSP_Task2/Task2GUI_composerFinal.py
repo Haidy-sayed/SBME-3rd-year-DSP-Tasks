@@ -132,15 +132,10 @@ class Ui_Form(object):
         sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
         self.pushButton.setSizePolicy(sizePolicy)
         self.pushButton.setObjectName("pushButton")
-        self.pushButton.clicked.connect( lambda : self.plot_summation())
-        
-        
+    
         self.pushButton_4.setSizePolicy(sizePolicy)
         self.pushButton_4.setObjectName("pushButton_4")
-        self.pushButton_4.clicked.connect( lambda : self.read())
-
-
-
+        
         self.pushButton_5.setSizePolicy(sizePolicy)
         self.formLayout.setWidget(15, QtWidgets.QFormLayout.FieldRole, self.pushButton_5)
 
@@ -220,8 +215,9 @@ class Ui_Form(object):
 
      #combo box -hussien
         self.pushButton_3.clicked.connect(lambda : self.removeSinCombo(self.comboBox.currentIndex()))
+        self.pushButton_4.clicked.connect( lambda : self.read())
         self.pushButton_5.clicked.connect(lambda: self.addSinCombo())
-        
+        self.pushButton.clicked.connect( lambda : self.plot_summation())
         self.actionSave_composed_signal.triggered.connect(lambda: self.gen_csv())
        
    #     self.pushButton_2.clicked.connect( lambda : self.move_to_main())

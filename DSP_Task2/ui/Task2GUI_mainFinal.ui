@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QWidget" name="widget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QWidget" name="widget_2" native="true">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QSplitter" name="splitter">
+              <property name="minimumSize">
+               <size>
+                <width>100</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <widget class="QWidget" name="mainChannel" native="true"/>
+              <widget class="QWidget" name="secindaryChannel" native="true"/>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="freqSlider">
+              <property name="font">
+               <font>
+                <pointsize>8</pointsize>
+               </font>
+              </property>
+              <property name="maximum">
+               <number>3</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="tickPosition">
+               <enum>QSlider::TicksBelow</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QLabel" name="mainLabel">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Main Channel</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="secondaryLabel">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Secondary Channel</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_file"/>
+    <addaction name="actionSave_as"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuComposer">
+    <property name="title">
+     <string>Composer</string>
+    </property>
+    <addaction name="actionOpen_composer"/>
+   </widget>
+   <widget class="QMenu" name="menuSignal_processes">
+    <property name="title">
+     <string>Signal processes</string>
+    </property>
+    <addaction name="actionSample"/>
+    <addaction name="actionReconstruct"/>
+    <addaction name="actionShow_2nd_Ch"/>
+    <addaction name="actionHide_2nd_Ch"/>
+    <addaction name="actionShow_reconstructed_on_main"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuComposer"/>
+   <addaction name="menuSignal_processes"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionOpen_file">
+   <property name="text">
+    <string>Open file</string>
+   </property>
+  </action>
+  <action name="actionSave_as">
+   <property name="text">
+    <string>Save as </string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionOpen_composer">
+   <property name="text">
+    <string>Open composer</string>
+   </property>
+  </action>
+  <action name="actionSample">
+   <property name="text">
+    <string>Sample</string>
+   </property>
+  </action>
+  <action name="actionReconstruct">
+   <property name="text">
+    <string>Reconstruct</string>
+   </property>
+  </action>
+  <action name="actionShow_2nd_Ch">
+   <property name="text">
+    <string>Show 2nd Ch</string>
+   </property>
+  </action>
+  <action name="actionHide_2nd_Ch">
+   <property name="text">
+    <string>Hide 2nd Ch</string>
+   </property>
+  </action>
+  <action name="actionShow_reconstructed_on_main">
+   <property name="text">
+    <string>Show reconstructed on main</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
